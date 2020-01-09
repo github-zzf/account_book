@@ -3,7 +3,8 @@ package com.yandaizang.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.segments.MergeSegments;
 
 import java.util.Date;
 import java.io.Serializable;
@@ -16,7 +17,7 @@ import java.io.Serializable;
  * @author zzf
  * @since 2020-01-07
  */
-public class Client extends Model<Client> {
+public class Client extends  Wrapper<Client> {
 
     private static final long serialVersionUID = 1L;
 
@@ -171,8 +172,22 @@ public class Client extends Model<Client> {
 	}
 
 	@Override
-	protected Serializable pkVal() {
-		return this.id;
+	public Client getEntity() {
+		return null;
 	}
 
+	@Override
+	public MergeSegments getExpression() {
+		return null;
+	}
+
+	@Override
+	public String getCustomSqlSegment() {
+		return null;
+	}
+
+	@Override
+	public String getSqlSegment() {
+		return null;
+	}
 }

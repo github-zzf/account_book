@@ -1,7 +1,9 @@
 package com.yandaizang.controler;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.yandaizang.entity.Client;
 import com.yandaizang.serviceImpl.ClientServiceImpl;
+import com.yandaizang.vo.JsonVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +21,7 @@ import java.util.List;
  * @since 2020-01-07
  */
 @Controller
-@RequestMapping("/yandaizang/client")
+@RequestMapping("/client")
 public class ClientController {
     @Autowired
     private ClientServiceImpl clientService;
@@ -27,15 +29,26 @@ public class ClientController {
     public String getIndex(){
         return "client";
     }
-    @RequestMapping(value = "listAll")
+    @RequestMapping(value = "findPage")
     @ResponseBody
-    public Object listAll(@RequestParam(value = "page",defaultValue = "1")int page,
-                           @RequestParam(value = "size",defaultValue = "10")int size){
-        return clientService.listAll(page, size);
+    public IPage<Client> findPage(@RequestParam(value = "page",defaultValue = "1")int page,
+                                  @RequestParam(value = "size",defaultValue = "10")int size){
+        return clientService.findPage(page, size);
+    }
+    @RequestMapping(value = "findList")
+    @ResponseBody
+    public Object findList(Client client){
+        return clientService.findList(client);
     }
     @RequestMapping(value = "updateClient")
     @ResponseBody
-    public int updateClient(Client client){
+    public JsonVo updateClient(Client client){
         return clientService.update(client);
     }
+    @RequestMapping(value = "insertClient")
+    @ResponseBody
+    public JsonVo insertClient(Client client){return clientService.insert(client);}
+    @RequestMapping(value = "removeClient")
+    @ResponseBody
+    public JsonVo removeClient(String ids){return clientService.remove(ids);}
 }

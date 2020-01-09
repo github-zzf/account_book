@@ -1,6 +1,9 @@
 package com.yandaizang.service;
 
 import com.yandaizang.entity.Client;
+import com.yandaizang.vo.JsonVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -11,11 +14,13 @@ import com.yandaizang.entity.Client;
  * @since 2020-01-07
  */
 public interface IClientService {
-    Object listAll(int page, int size);
+    List<Client> findList(Client client);
 
-    int insert(Client client);
+    Object findPage(int page, int size);
 
-    int remove(Integer clientId);
+    JsonVo insert(Client client);
 
-    int update(Client client);
+    JsonVo remove(String ids);
+
+    JsonVo update(Client client);
 }
